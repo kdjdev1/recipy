@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Archive | Aura</title>
+
+    <!-- Meta Descriptions for SEO -->
+    <meta name="description"
+        content="Browse our extensive collection of high-end, editorial recipes organized by cuisine, dietary needs, and cooking time.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: 'oklch(0.45 0.15 25)',
+                            hover: 'oklch(0.40 0.15 25)',
+                        },
+                        base: {
+                            DEFAULT: 'oklch(0.98 0.01 70)',
+                            surface: 'oklch(1 0 0)',
+                        },
+                        typography: {
+                            main: 'oklch(0.2 0.02 260)',
+                            muted: 'oklch(0.5 0.02 260)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Custom JS -->
+    <script src="js/database.js"></script>
+    <script src="js/script.js" defer></script>
+</head>
+
+<body class="bg-base text-typography-main font-sans min-h-screen flex flex-col">
+
+    <!-- Sticky Navigation (Liquid Glass) -->
+    <header class="sticky top-0 z-50 liquid-glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html"
+                class="font-serif text-3xl font-bold tracking-tight text-typography-main hover:opacity-80 transition-opacity"
+                aria-label="Aura Home">Aura.</a>
+
+            <nav class="hidden md:flex gap-8 items-center" aria-label="Main Navigation">
+                <a href="index.html" class="text-sm font-medium hover:text-brand transition-colors pb-1">Home</a>
+                <a href="archive.html" class="text-sm font-medium text-brand border-b-2 border-brand pb-1">Cuisines</a>
+                <a href="recipe.html" class="text-sm font-medium hover:text-brand transition-colors pb-1">Latest
+                    Recipe</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="archive.html"
+                    class="hidden md:inline-flex px-6 py-3 bg-brand text-white text-sm font-medium rounded-full hover:bg-brand-hover transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-brand shadow-sm">
+                    Explore Menu
+                </a>
+                <button class="md:hidden text-typography-main p-2" aria-label="Open Mobile Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+
+        <!-- Archive Header -->
+        <div class="mb-12 border-b border-typography-muted/20 pb-10">
+            <h1 class="text-5xl font-serif text-typography-main mb-6">The Collection</h1>
+            <p class="text-xl text-typography-muted font-serif max-w-2xl">Over 200 meticulously tested recipes from
+                around the globe, designed for clarity and culinary excellence.</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-12 items-start">
+
+            <!-- Accessible Sidebar (Flexbox) -->
+            <aside class="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-32 h-auto">
+                <div class="bg-base-surface p-6 rounded-2xl border border-typography-muted/10 shadow-sm">
+
+                    <div class="mb-8">
+                        <h3 class="font-serif text-lg text-typography-main mb-4 flex items-center justify-between">
+                            Dietary
+                            <svg class="w-4 h-4 text-typography-muted" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </h3>
+                        <div class="flex flex-col gap-3">
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Vegetarian</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Vegan</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Gluten-Free</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Pescatarian</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="font-serif text-lg text-typography-main mb-4 flex items-center justify-between">
+                            Difficulty
+                            <svg class="w-4 h-4 text-typography-muted" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </h3>
+                        <div class="flex flex-col gap-3">
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Beginner</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Intermediate</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span
+                                    class="text-sm text-typography-main hover:text-brand transition-colors">Advanced</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-lg text-typography-main mb-4 flex items-center justify-between">
+                            Time
+                            <svg class="w-4 h-4 text-typography-muted" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </h3>
+                        <div class="flex flex-col gap-3">
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span class="text-sm text-typography-main hover:text-brand transition-colors">Under 30
+                                    mins</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span class="text-sm text-typography-main hover:text-brand transition-colors">30 - 60
+                                    mins</span>
+                            </label>
+                            <label class="custom-checkbox flex items-center cursor-pointer group">
+                                <input type="checkbox" class="ingredient-checkbox">
+                                <span class="checkmark shadow-sm"></span>
+                                <span class="text-sm text-typography-main hover:text-brand transition-colors">Over 1
+                                    hour</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full mt-8 px-4 py-3 bg-typography-main text-white text-sm font-medium rounded-xl hover:bg-black transition-colors focus:ring-2 focus:ring-typography-main focus:ring-offset-2">
+                        Apply Filters
+                    </button>
+                    <button
+                        class="w-full mt-3 px-4 py-3 bg-transparent text-typography-muted text-sm font-medium rounded-xl hover:text-typography-main hover:bg-base transition-colors focus:ring-2 focus:ring-typography-muted">
+                        Clear All
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Responsive Recipe Grid -->
+            <section class="flex-grow w-full">
+                <div class="flex justify-between items-center mb-6">
+                    <p id="results-count"
+                        class="text-sm font-medium text-typography-muted uppercase tracking-widest text-xs">Loading
+                        Results...</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-typography-main">Sort by:</span>
+                        <select id="sort-select"
+                            class="bg-transparent border-none text-brand font-medium text-sm focus:ring-0 cursor-pointer outline-none">
+                            <option value="latest">Latest</option>
+                            <option value="popularity">Popularity</option>
+                            <option value="time-asc">Time: Low to High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Recipes will be injected here via JS -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-16 flex justify-center">
+                    <nav id="pagination-nav" class="flex items-center gap-2 flex-wrap justify-center max-w-full"
+                        aria-label="Pagination">
+                        <!-- Pagination buttons injected via JS -->
+                    </nav>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-base-surface border-t border-typography-muted/20 py-16 mt-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="font-serif text-2xl font-bold text-typography-main block mb-4">Aura.</span>
+            <p class="text-typography-muted text-sm max-w-sm mx-auto leading-relaxed">Culinary perfection in the comfort
+                of your home.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
