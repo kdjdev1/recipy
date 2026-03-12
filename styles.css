@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* OKLCH Color Tokens */
+  --color-background: oklch(0.98 0.01 70); /* Off-white/stone */
+  --color-surface: oklch(1 0 0); /* Pure white */
+  --color-text-main: oklch(0.2 0.02 260); /* Deep charcoal */
+  --color-text-muted: oklch(0.5 0.02 260); /* Muted gray */
+  --color-primary: oklch(0.45 0.15 25); /* Rich culinary crimson */
+  --color-primary-hover: oklch(0.40 0.15 25);
+  --color-accent: oklch(0.55 0.12 150); /* Deep sage green */
+  --color-border: oklch(0.9 0.02 260);
+  
+  /* Typography */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-text-main);
+}
+
+/* Base Headings for strict hierarchy */
+h1 { font-size: clamp(3rem, 5vw, 5rem); line-height: 1.1; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.2; letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.3; }
+
+/* Custom Colors integrated with Tailwind (we'll configure tailwind config in HTML) */
+.bg-primary { background-color: var(--color-primary); }
+.text-primary { color: var(--color-primary); }
+.border-primary { border-color: var(--color-primary); }
+.hover\:bg-primary-hover:hover { background-color: var(--color-primary-hover); }
+
+/* Liquid Glass (Glassmorphism) */
+.liquid-glass {
+  background-color: oklch(1 0 0 / 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid oklch(0.9 0.02 260 / 0.5);
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.bento-item {
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* Swiss Design Elements */
+.swiss-line {
+  height: 1px;
+  background-color: var(--color-text-main);
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* Custom Checkbox (shadcn/ui style primitive) */
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox .checkmark {
+  position: relative;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+  border-color: var(--color-text-muted);
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: var(--color-text-main);
+  border-color: var(--color-text-main);
+}
+
+.custom-checkbox input:focus-visible ~ .checkmark {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.custom-checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Interactive elements 24x24 minimum */
+button, a.btn {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* Recipe Content Formats */
+.recipe-content p {
+  max-width: 75ch; /* Restricted line length */
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+}
+
+.recipe-content li {
+  margin-bottom: 0.75rem;
+}
+
+.image-zoom-container {
+  overflow: hidden;
+}
+
+.image-zoom-container img {
+  transition: transform 0.7s ease;
+}
+
+.image-zoom-container:hover img {
+  transform: scale(1.05);
+}
+
+.ingredient-label.checked {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
